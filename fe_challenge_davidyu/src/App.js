@@ -4,13 +4,18 @@
 
 import React, { Component } from 'react';
 import { Navigation } from './components/Navigation';
+import { Tabular } from './components/Tabular';
 import { getRequiredData } from './apis';
+import { loadAllShifts } from './actions';
+import store from './store';
+
+const { getState, dispatch } = store;
 
 class App extends Component {
   componentWillMount() {
     getRequiredData()
       .then((response) => {
-        console.log(response.data);
+        dispatch(loadAllShifts(response.data));
       });
   }
   
@@ -18,6 +23,7 @@ class App extends Component {
     return (
       <div>
         <Navigation />
+        <Tabular data={getState().shifts} />
       </div>
     )
   }

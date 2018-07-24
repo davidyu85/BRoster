@@ -23,7 +23,7 @@ const NavbarStyled = styled(Navbar)`
 `;
 
 const NavbarBrandStyle = styled(NavbarBrand)`
-  @media (min-width:600px) {
+  @media (min-width: 800px) {
     margin-left: 70px;
   }
 
