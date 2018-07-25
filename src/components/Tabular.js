@@ -57,7 +57,7 @@ export const Tabular = (props) => {
       <tbody>
         {
           data.map((shift, key) => 
-           tableList(shift, config.timezone, key))
+            tableList(shift, config.timezone, key))
         }
       </tbody>
     </TableStyle>

@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { Navigation } from './components/Navigation';
 import { Tabular } from './components/Tabular';
+import { TimelineView } from './components/Timeline';
 import { history } from './store';
 
 const mapStateToProps = state => {
@@ -22,7 +23,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const routes = (props) => {
-  const { shifts, config } = props;  
+  const { shifts, config } = props;
   return (
     <Switch>
       <Route exact path="/" render={() => (
@@ -30,8 +31,16 @@ const routes = (props) => {
           data={shifts}
           config={config}
         />
-      )} />
-      <Route path="/timeline" render={() => (<div>Miss</div>)} />
+      )} 
+      />
+      <Route path="/timeline" render={() => (
+        <TimelineView 
+          data={shifts}
+          defaultTimeStart={shifts[shifts.length - 1].end_time}
+          defaultTimeEnd={shifts[0].start_time}
+        />
+      )} 
+      />
     </Switch>
   );
 };

@@ -13,7 +13,7 @@ import employees from './data/employees.json';
 const preprocessedShift = () => {
   var newShift = [];
   
-  shifts.map((shift) => {
+  shifts.forEach((shift) => {
     newShift.push(shift);    
     var latest = newShift[newShift.length - 1];
     
@@ -23,7 +23,7 @@ const preprocessedShift = () => {
     
     latest.role = roles.find(
       role => role.id === latest.role_id
-    );  
+    );
   });
   
   return newShift.sort(sortByDateTime);

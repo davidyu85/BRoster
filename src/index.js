@@ -5,6 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles.css';
 
 const render = () => (
   ReactDOM.render(
@@ -16,5 +17,5 @@ const render = () => (
 );
 
 store.subscribe(render); 
-render(); // initial render
+render();
 registerServiceWorker();
