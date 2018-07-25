@@ -2,15 +2,21 @@
  * Tabular.js - This component generates the data view in
  * table format.
  */
-
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
 
 const TableStyle = styled(Table)`
   font-weight: 100;
   font-size: 85%;
+`;
+
+const ButtonStyle = styled(Button)`
+  float: right !important;
+  margin-top: -6px;
+  background: #900 !important;
+  border: none !important;
 `;
 
 // This is the coloured circle display next to role
@@ -24,20 +30,28 @@ const Circle = styled.div`
 `;
 
 // Template of how the table rows are represented.
-export const tableList = (shift, timezone, key) => {
-  const { employee, role, start_time, end_time } = shift;
+const TableList = (shift, timezone, key, onClickOpenDrawer) => {
+  const { id, employee, role, start_time, end_time } = shift;
   const { first_name, last_name } = employee;
   const { name, background_colour } = role;
 
   return (            
     <tr key={key}>
-      <td>{`${first_name} ${last_name}`}</td>
-      <td><Circle colour={background_colour} />{name}</td>
+      <td>
+        <ButtonStyle
+          size="sm"
+          onClick={() => onClickOpenDrawer(id, true)}
+        >
+          Details
+        </ButtonStyle>
+      </td>
       
       <td>
-        Starting: {moment(start_time).utc().format('LLLL')}
-        <br />
-        End: {moment(end_time).utc().format('LLLL')}
+        {`${first_name} ${last_name}`}
+      </td>
+      
+      <td>
+        <Circle colour={background_colour} />{name}
       </td>
       
       <td>
@@ -50,22 +64,22 @@ export const tableList = (shift, timezone, key) => {
 }
 
 export const Tabular = (props) => {
-  const { data, config } = props;
+  const { data, config, onClickOpenDrawer } = props;
 
   return (
     <TableStyle borderless dark>
       <thead>
         <tr>
+          <th></th>
           <th>Name</th>
           <th>Role</th>
-          <th>UTC Date & Time</th>
-          <th>Date & Time in - {config.timezone}</th>
+          <th>Local Date & Time in: {config.timezone}</th>
         </tr>
       </thead>
       <tbody>
         {
           data.map((shift, key) => 
-            tableList(shift, config.timezone, key))
+            TableList(shift, config.timezone, key, onClickOpenDrawer))
         }
       </tbody>
     </TableStyle>

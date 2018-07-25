@@ -37,7 +37,8 @@ const sortByDateTime = (a, b) => {
 // The inital state.
 const initialState = {
   shifts: preprocessedShift(),
-  config: config
+  config: config,
+  drawer: false
 };
 
 

@@ -4,21 +4,19 @@
 
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Tabular } from './Tabular';
+import TabularViewContainer from '../containers/TabularViewContainer'
 import { TimelineView } from './Timeline';
 
 // Please define the routes here.
-export const RouteList = (props) => {
-  const { shifts, config } = props;
-  
+export const RouteList = (props, onToggleDrawer) => {
+  const {
+    shifts
+  } = props;
+
   return [
     {
       path: '/',
-      component:
-        <Tabular
-          data={shifts}
-          config={config}
-        />
+      component: <TabularViewContainer /> 
     },
     {
       path: '/timeline',

@@ -1,5 +1,5 @@
 /**
- * Nav.js - The navigation sidebar.
+ * Navigation.js - The navigation sidebar.
  */
 import React from 'react';
 import styled from 'styled-components';
@@ -14,6 +14,8 @@ import {
 } from 'reactstrap';
 
 const NavbarStyled = styled(Navbar)`
+  position: fixed !important;
+  width: 100%;
   background: #700; 
   a { color:#fff; }
 `;

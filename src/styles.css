@@ -1,5 +1,5 @@
 body {
-  background: #000;
+  background: #32383e;
 }
 
 .rct-outer {
@@ -16,8 +16,8 @@ body {
   border: 1px solid #444 !important;
   font-size: 70% !important;
   user-select: none;
-      white-space: nowrap; 
-    overflow: hidden;
+  white-space: nowrap; 
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -26,4 +26,12 @@ body {
   font-size: 90%;
   text-align: right;
   padding-right: 18px !important;
+}
+
+.react-drawer-drawer {
+  background-color: #ccc !important;
+  padding: 24px;
+  top: 67px;
+  border-left: 1px solid #222;
+  width: 400px;
 }
