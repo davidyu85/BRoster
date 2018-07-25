@@ -20,12 +20,14 @@ const Spaces = styled.div`
 const mapStateToProps = state => {
   const { 
     shifts, 
-    config
+    config,
+    router
   } = state;
   
   return {
     shifts,
-    config
+    config,
+    router
   };
 }
 
@@ -33,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation atPage={this.props.router.location.pathname} />
         <Spaces />
         <ConnectedRouter history={history}>
           <div>{Routes(this.props)}</div>

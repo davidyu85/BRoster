@@ -27,29 +27,32 @@ const NavbarBrandStyle = styled(NavbarBrand)`
 
   margin-right: 90px !important;
   font-family: 'Roboto Slab', serif;
-`;
 
-const NavLinkStyle = styled(NavLink)`
-  font-weight: 100;
-  color: #ffbcbc !important;
-  
   :hover {
-    text-decoration: underline;
     color: #fff !important;
   }
 `;
 
-export const Navigation = () => (
+const NavLinkStyle = styled(NavLink)`
+  font-weight: 100;
+  color: ${(props) => (props.href === props.at) ? '#fff' : '#ffbcbc' }  !important;
+  
+  :hover {
+    text-decoration: underline !important;
+  }
+`;
+
+export const Navigation = (props) => (
   <NavbarStyled expand="md">
     <NavbarBrandStyle href="/"><h3>BRoster</h3></NavbarBrandStyle>
     <NavbarToggler />
-    <Collapse navbar>
+    <Collapse isOpen={true} navbar>
       <Nav navbar>
         <NavItem>
-          <NavLinkStyle href="/">Tabular view</NavLinkStyle>
+          <NavLinkStyle href="/" at={props.atPage}>Tabular view</NavLinkStyle>
         </NavItem>
         <NavItem>
-          <NavLinkStyle href="/timeline">Timeline visualisation</NavLinkStyle>
+          <NavLinkStyle href="/timeline" at={props.atPage}>Timeline visualisation</NavLinkStyle>
         </NavItem>
       </Nav>
     </Collapse>
