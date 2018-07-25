@@ -34,7 +34,7 @@ export const tableList = (shift, timezone, key) => {
       <td>{`${first_name} ${last_name}`}</td>
       <td><Circle colour={background_colour} />{name}</td>
       
-      <td pullRight>
+      <td>
         Starting: {moment(start_time).utc().format('LLLL')}
         <br />
         End: {moment(end_time).utc().format('LLLL')}

@@ -4,11 +4,9 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
+import { Routes } from './components/Routes';
 import { Navigation } from './components/Navigation';
-import { Tabular } from './components/Tabular';
-import { TimelineView } from './components/Timeline';
 import { history } from './store';
 
 // Parse state from Redux store to props.
@@ -24,39 +22,13 @@ const mapDispatchToProps = dispatch => {
   return {};
 }
 
-const routes = (props) => {
-  const { shifts, config } = props;
-  return (
-    <Switch>
-      
-      <Route exact path="/" render={() => (
-        <Tabular
-          data={shifts}
-          config={config}
-        />
-      )} 
-      />
-      
-      <Route path="/timeline" render={() => (
-        <TimelineView 
-          data={shifts}
-          defaultTimeStart={shifts[shifts.length - 1].end_time}
-          defaultTimeEnd={shifts[0].start_time}
-        />
-      )} 
-      />
-      
-    </Switch>
-  );
-};
-
 class App extends Component {
   render() {
     return (
       <div>
         <Navigation />
         <ConnectedRouter history={history}>
-          <div>{routes(this.props)}</div>
+          <div>{Routes(this.props)}</div>
         </ConnectedRouter>
       </div>
     )
