@@ -11,6 +11,7 @@ import { Tabular } from './components/Tabular';
 import { TimelineView } from './components/Timeline';
 import { history } from './store';
 
+// Parse state from Redux store to props.
 const mapStateToProps = state => {
   return {
     shifts: state.shifts,
@@ -18,6 +19,7 @@ const mapStateToProps = state => {
   };
 }
 
+// Enable Redux store dispatch for dispatching an action.
 const mapDispatchToProps = dispatch => {
   return {};
 }
@@ -26,6 +28,7 @@ const routes = (props) => {
   const { shifts, config } = props;
   return (
     <Switch>
+      
       <Route exact path="/" render={() => (
         <Tabular
           data={shifts}
@@ -33,6 +36,7 @@ const routes = (props) => {
         />
       )} 
       />
+      
       <Route path="/timeline" render={() => (
         <TimelineView 
           data={shifts}
@@ -41,6 +45,7 @@ const routes = (props) => {
         />
       )} 
       />
+      
     </Switch>
   );
 };

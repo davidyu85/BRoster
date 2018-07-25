@@ -1,3 +1,8 @@
+/**
+ * Tabular.js - This component generates the data view in
+ * table format.
+ */
+
 import React from 'react';
 import { Table } from 'reactstrap';
 import styled from 'styled-components';
@@ -5,17 +10,20 @@ import moment from 'moment-timezone';
 
 const TableStyle = styled(Table)`
   font-weight: 100;
+  font-size: 85%;
 `;
 
+// This is the coloured circle display next to role
 const Circle = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 100%;
   background: ${(props) => props.colour};
   display: inline-block;
-  margin: 0px 12px -1px 0px;
+  margin: 0px 10px -3px 0px;
 `;
 
+// Template of how the table rows are represented.
 export const tableList = (shift, timezone, key) => {
   const { employee, role, start_time, end_time } = shift;
   const { first_name, last_name } = employee;
@@ -23,10 +31,10 @@ export const tableList = (shift, timezone, key) => {
 
   return (            
     <tr key={key}>
-      <td>{first_name + ' ' + last_name}</td>
+      <td>{`${first_name} ${last_name}`}</td>
       <td><Circle colour={background_colour} />{name}</td>
       
-      <td>
+      <td pullRight>
         Starting: {moment(start_time).utc().format('LLLL')}
         <br />
         End: {moment(end_time).utc().format('LLLL')}
