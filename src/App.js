@@ -1,26 +1,52 @@
 /**
- * App.js - The main page container.
+ * App.js - The main page container containing routes.
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router';
+import { ConnectedRouter } from 'connected-react-router';
 import { Navigation } from './components/Navigation';
 import { Tabular } from './components/Tabular';
-import store from './store';
+import { history } from './store';
 
-const { getState } = store;
+const mapStateToProps = state => {
+  return {
+    shifts: state.shifts,
+    config: state.config
+  };
+}
 
-class App extends Component { 
+const mapDispatchToProps = dispatch => {
+  return {};
+}
+
+const routes = (props) => {
+  const { shifts, config } = props;  
+  return (
+    <Switch>
+      <Route exact path="/" render={() => (
+        <Tabular
+          data={shifts}
+          config={config}
+        />
+      )} />
+      <Route path="/timeline" render={() => (<div>Miss</div>)} />
+    </Switch>
+  );
+};
+
+class App extends Component {
   render() {
     return (
       <div>
         <Navigation />
-        <Tabular
-          data={getState().shifts}
-          config={getState().config}
-        />
+        <ConnectedRouter history={history}>
+          <div>{routes(this.props)}</div>
+        </ConnectedRouter>
       </div>
     )
   }
 };
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

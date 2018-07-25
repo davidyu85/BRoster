@@ -47,7 +47,7 @@ export const Navigation = () => (
           <NavLinkStyle href="/">Tabular view</NavLinkStyle>
         </NavItem>
         <NavItem>
-          <NavLinkStyle href="/">Timeline visualisation</NavLinkStyle>
+          <NavLinkStyle href="/timeline">Timeline visualisation</NavLinkStyle>
         </NavItem>
       </Nav>
     </Collapse>

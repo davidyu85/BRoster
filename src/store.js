@@ -1,6 +1,54 @@
-import { createStore } from 'redux';
+import { createBrowserHistory } from 'history'
+import { applyMiddleware, compose, createStore } from 'redux'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 import reducers from './reducers';
 
-const store = createStore(reducers);
+import shifts from './data/shifts.json';
+import roles from './data/roles.json';
+import config from './data/config.json';
+import employees from './data/employees.json';
 
-export default store;
+// Combine shift with employees and roles to get a meaningfull data
+// for the visualisations.
+const preprocessedShift = () => {
+  var newShift = [];
+  
+  shifts.map((shift) => {
+    newShift.push(shift);    
+    var latest = newShift[newShift.length - 1];
+    
+    latest.employee = employees.find(
+      person => person.id === latest.employee_id
+    );
+    
+    latest.role = roles.find(
+      role => role.id === latest.role_id
+    );  
+  });
+  
+  return newShift.sort(sortByDateTime);
+}
+
+// Sort the list based on date/time.
+const sortByDateTime = (a, b) => {
+  return new Date(b.start_time) - new Date(a.start_time);
+}
+
+// The inital state.
+const initialState = {
+  shifts: preprocessedShift(),
+  config: config
+};
+
+
+export const history = createBrowserHistory();
+
+export const store = createStore(
+  connectRouter(history)(reducers), // new root reducer with router state
+  initialState,
+  compose(
+    applyMiddleware(
+      routerMiddleware(history)
+    )
+  )
+);
