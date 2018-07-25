@@ -1,7 +1,6 @@
 /**
  * Nav.js - The navigation sidebar.
  */
-
 import React from 'react';
 import styled from 'styled-components';
 import {
@@ -15,11 +14,8 @@ import {
 } from 'reactstrap';
 
 const NavbarStyled = styled(Navbar)`
-  background: #700;
-  
-  a {
-    color:#fff;
-  }
+  background: #700; 
+  a { color:#fff; }
 `;
 
 const NavbarBrandStyle = styled(NavbarBrand)`
@@ -31,6 +27,16 @@ const NavbarBrandStyle = styled(NavbarBrand)`
   font-family: 'Roboto Slab', serif;
 `;
 
+const NavLinkStyle = styled(NavLink)`
+  font-weight: 100;
+  color: #ffbcbc !important;
+  
+  :hover {
+    text-decoration: underline;
+    color: #fff !important;
+  }
+`;
+
 export const Navigation = () => (
   <NavbarStyled expand="md">
     <NavbarBrandStyle href="/"><h3>BRoster</h3></NavbarBrandStyle>
@@ -38,10 +44,10 @@ export const Navigation = () => (
     <Collapse navbar>
       <Nav navbar>
         <NavItem>
-          <NavLink href="/">Tabular view</NavLink>
+          <NavLinkStyle href="/">Tabular view</NavLinkStyle>
         </NavItem>
         <NavItem>
-          <NavLink href="/">Timeline visualisation</NavLink>
+          <NavLinkStyle href="/">Timeline visualisation</NavLinkStyle>
         </NavItem>
       </Nav>
     </Collapse>

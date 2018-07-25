@@ -5,25 +5,19 @@
 import React, { Component } from 'react';
 import { Navigation } from './components/Navigation';
 import { Tabular } from './components/Tabular';
-import { getRequiredData } from './apis';
-import { loadAllShifts } from './actions';
 import store from './store';
 
-const { getState, dispatch } = store;
+const { getState } = store;
 
-class App extends Component {
-  componentWillMount() {
-    getRequiredData()
-      .then((response) => {
-        dispatch(loadAllShifts(response.data));
-      });
-  }
-  
+class App extends Component { 
   render() {
     return (
       <div>
         <Navigation />
-        <Tabular data={getState().shifts} />
+        <Tabular
+          data={getState().shifts}
+          config={getState().config}
+        />
       </div>
     )
   }
