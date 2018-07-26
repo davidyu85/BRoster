@@ -19,9 +19,10 @@ describe('Testing for TabularViewContainer.js', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
   
-  it('onClickOpenDrawer dispatch correct action', () => {
+  it('onClickOpenDrawer dispatch correct actions', () => {
     const dispatch = jest.fn();
-    onClickOpenDrawer('1', true, mapDispatchToProps(dispatch));
-    expect(dispatch.mock.calls[0][0]).toEqual({ bool: true, type: 'OPEN_DRAWER'});
+    onClickOpenDrawer(1, true, mapDispatchToProps(dispatch));
+    expect(dispatch.mock.calls[0][0]).toEqual({ shiftId: 1, type: 'SELECT_SHIFT'});
+    expect(dispatch.mock.calls[1][0]).toEqual({ bool: true, type: 'OPEN_DRAWER'});
   });
 });

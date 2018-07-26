@@ -6,61 +6,75 @@
 
 import React, { Component } from 'react';
 import ReactDrawer from 'react-drawer';
+import DrawerContentContainer from './DrawerContentContainer';
+import { FaClose } from 'react-icons/lib/fa';
 import { Tabular } from '../components/Tabular';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { openDrawer } from '../actions'
-import 'react-drawer/lib/react-drawer.css';
+import styled from 'styled-components';
+import { openDrawer, selectShift } from '../actions';
 
-// Parse state from Redux store to props.
-const mapStateToProps = state => {
-  const { 
-    shifts, 
-    config, 
-    drawer 
-  } = state;
+const Close = styled(FaClose)`
+  cursor: pointer;
+  position: absolute;
   
-  return {
-    shifts,
-    config,
-    drawer
-  };
-}
+  :hover {
+    color: #600;
+  }
+`;
+
+// Passing down all states from Redux store to props.
+const mapStateToProps = state => state;
 
 // Enable Redux store dispatch for dispatching an action.
 export const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators(
   {
-    openDrawer
+    openDrawer,
+    selectShift
   }, 
   dispatch
 )
 
+// This opens the drawer and changes the selectedShift state, which is 
+// displayed in DrawerContentContainer.js
 export const onClickOpenDrawer = (shiftId, bool, props) => {
-  return props.openDrawer(bool);
+  const { 
+    selectShift,
+    openDrawer
+  } = props;
+  
+  if(shiftId) selectShift(shiftId);
+ 
+  return openDrawer(bool);
 }
 
 class TabularViewContainer extends Component {
   render() {
     const { 
       shifts,
+      selectedShift,
       config,
-      drawer
+      drawer,
+      openDrawer
     } = this.props;
     
     return (
       <div>
         <Tabular
           data={shifts}
+          selectedData={selectedShift}
           config={config}
-          onClickOpenDrawer={(shiftId, bool) => onClickOpenDrawer(shiftId, bool, this.props)}
+          onClickOpenDrawer={(shiftId, bool) => 
+            onClickOpenDrawer(shiftId, bool, this.props)
+          }
         />
         <ReactDrawer
           open={drawer}
           position={'right'}
           noOverlay={true}
         >
-          <i className="icono-cross"></i>
-          <h4>What a nice drawer !</h4>
+          <Close size={40} onClick={() => openDrawer(false)} /> 
+          <DrawerContentContainer />
         </ReactDrawer>
       </div>
     )

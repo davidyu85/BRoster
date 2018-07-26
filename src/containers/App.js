@@ -17,19 +17,7 @@ const Spaces = styled.div`
 `;
 
 // Parse state from Redux store to props.
-const mapStateToProps = state => {
-  const { 
-    shifts, 
-    config,
-    router
-  } = state;
-  
-  return {
-    shifts,
-    config,
-    router
-  };
-}
+const mapStateToProps = state => state
 
 class App extends Component {
   render() {

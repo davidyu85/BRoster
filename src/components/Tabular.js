@@ -14,7 +14,6 @@ const TableStyle = styled(Table)`
 
 const ButtonStyle = styled(Button)`
   float: right !important;
-  margin-top: -6px;
   background: #900 !important;
   border: none !important;
 `;
@@ -29,14 +28,19 @@ const Circle = styled.div`
   margin: 0px 10px -3px 0px;
 `;
 
+const TRSelect = styled.tr`
+  background: ${(props) => (props.isSelected) ? '#444' : 'none'};
+  td { vertical-align: middle !important; }
+`;
+
 // Template of how the table rows are represented.
-const TableList = (shift, timezone, key, onClickOpenDrawer) => {
+const TableList = (shift, selectedShift, timezone, key, onClickOpenDrawer) => {
   const { id, employee, role, start_time, end_time } = shift;
   const { first_name, last_name } = employee;
   const { name, background_colour } = role;
 
   return (            
-    <tr key={key}>
+    <TRSelect key={key} isSelected={(id === selectedShift.id)}>
       <td>
         <ButtonStyle
           size="sm"
@@ -59,12 +63,17 @@ const TableList = (shift, timezone, key, onClickOpenDrawer) => {
         <br />
         End: {moment(end_time).tz(timezone).format('LLLL')}
       </td>
-    </tr>
+    </TRSelect>
   )
 }
 
 export const Tabular = (props) => {
-  const { data, config, onClickOpenDrawer } = props;
+  const { 
+    data,
+    selectedData,
+    config,
+    onClickOpenDrawer
+  } = props;
 
   return (
     <TableStyle borderless dark>
@@ -79,7 +88,7 @@ export const Tabular = (props) => {
       <tbody>
         {
           data.map((shift, key) => 
-            TableList(shift, config.timezone, key, onClickOpenDrawer))
+            TableList(shift, selectedData, config.timezone, key, onClickOpenDrawer))
         }
       </tbody>
     </TableStyle>

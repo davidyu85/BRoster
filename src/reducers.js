@@ -3,6 +3,13 @@ const reducers = (state, action) => {
     case 'OPEN_DRAWER':
       return { ...state, drawer: action.bool }; 
 
+    case 'SELECT_SHIFT':
+      let foundShift = state.shifts.find((shift) => (
+        shift.id === action.shiftId
+      ));
+
+      return { ...state, selectedShift: foundShift}; 
+      
     default:
       return state;
   }

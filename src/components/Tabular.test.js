@@ -9,7 +9,7 @@ import config from '../data/config.json'
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Testing Tabular.js', () => {
-  it('Be able to display more than one row including the one in <thead>', () => {
+  it('Be able to display the correct row', () => {
     const data = [{
       id: 61578,
       start_time: '2018-06-19T13:00:00+00:00',
@@ -21,10 +21,11 @@ describe('Testing Tabular.js', () => {
     const wrapper = shallow(
     <Tabular
       data={data}
+      selectedData={data[0]}
       config={config}
     />
     );
-    expect(wrapper.find('tr').length).toBe(2);
+    expect(wrapper.find('tr').length).toBe(1);
   });
   
   it('Tabular renders without crashing', () => {

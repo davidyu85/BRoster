@@ -35,7 +35,7 @@ const NavbarBrandStyle = styled(NavbarBrand)`
 
 const NavLinkStyle = styled(NavLink)`
   font-weight: 100;
-  color: ${(props) => (props.href === props.at) ? '#fff' : '#ffbcbc' }  !important;
+  color: ${(props) => (props.href === (process.env.PUBLIC_URL + props.at)) ? '#fff' : '#ffbcbc' }  !important;
   
   :hover {
     text-decoration: underline !important;
@@ -44,15 +44,15 @@ const NavLinkStyle = styled(NavLink)`
 
 export const Navigation = (props) => (
   <NavbarStyled expand="md">
-    <NavbarBrandStyle href="/"><h3>BRoster</h3></NavbarBrandStyle>
+    <NavbarBrandStyle href={`${process.env.PUBLIC_URL}/`}><h3>BRoster</h3></NavbarBrandStyle>
     <NavbarToggler />
     <Collapse isOpen={true} navbar>
       <Nav navbar>
         <NavItem>
-          <NavLinkStyle href="/" at={props.atPage}>Tabular view</NavLinkStyle>
+          <NavLinkStyle href={`${process.env.PUBLIC_URL}/`} at={props.atPage}>Tabular view</NavLinkStyle>
         </NavItem>
         <NavItem>
-          <NavLinkStyle href="/timeline" at={props.atPage}>Timeline visualisation</NavLinkStyle>
+          <NavLinkStyle href={`${process.env.PUBLIC_URL}/timeline`} at={props.atPage}>Timeline visualisation</NavLinkStyle>
         </NavItem>
       </Nav>
     </Collapse>

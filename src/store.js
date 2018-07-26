@@ -37,12 +37,16 @@ const sortByDateTime = (a, b) => {
 // The inital state.
 const initialState = {
   shifts: preprocessedShift(),
-  config: config,
-  drawer: false
+  selectedShift: { role: {}, employee: {} },
+  drawer: false,
+  roles,
+  config
 };
 
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({
+  basename: process.env.PUBLIC_URL,
+});
 
 export const store = createStore(
   connectRouter(history)(reducers), // new root reducer with router state
