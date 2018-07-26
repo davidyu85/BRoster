@@ -12,7 +12,11 @@ import { Tabular } from '../components/Tabular';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { openDrawer, selectShift } from '../actions';
+import { 
+  openDrawer,
+  selectShift,
+  setEditMode
+} from '../actions';
 
 const Close = styled(FaClose)`
   cursor: pointer;
@@ -30,7 +34,8 @@ const mapStateToProps = state => state;
 export const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators(
   {
     openDrawer,
-    selectShift
+    selectShift,
+    setEditMode
   }, 
   dispatch
 )
@@ -40,15 +45,23 @@ export const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators(
 export const onClickOpenDrawer = (shiftId, bool, props) => {
   const { 
     selectShift,
-    openDrawer
+    openDrawer,
+    setEditMode
   } = props;
   
-  if(shiftId) selectShift(shiftId);
+  if(shiftId) {
+    setEditMode(false);
+    selectShift(shiftId);
+  }
  
   return openDrawer(bool);
 }
 
 class TabularViewContainer extends Component {
+  componentWillUnmount() {
+    this.props.openDrawer(false);
+  }
+  
   render() {
     const { 
       shifts,

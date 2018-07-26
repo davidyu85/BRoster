@@ -22,7 +22,8 @@ describe('Testing for TabularViewContainer.js', () => {
   it('onClickOpenDrawer dispatch correct actions', () => {
     const dispatch = jest.fn();
     onClickOpenDrawer(1, true, mapDispatchToProps(dispatch));
-    expect(dispatch.mock.calls[0][0]).toEqual({ shiftId: 1, type: 'SELECT_SHIFT'});
-    expect(dispatch.mock.calls[1][0]).toEqual({ bool: true, type: 'OPEN_DRAWER'});
+    expect(dispatch.mock.calls[0][0]).toEqual({ bool: false, type: 'SET_EDIT_MODE'});
+    expect(dispatch.mock.calls[1][0]).toEqual({ shiftId: 1, type: 'SELECT_SHIFT'});
+    expect(dispatch.mock.calls[2][0]).toEqual({ bool: true, type: 'OPEN_DRAWER'});
   });
 });

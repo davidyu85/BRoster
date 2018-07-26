@@ -12,6 +12,7 @@ import {
   NavLink,
   NavItem
 } from 'reactstrap';
+import { history } from '../store';
 
 const NavbarStyled = styled(Navbar)`
   position: fixed !important;
@@ -24,36 +25,53 @@ const NavbarBrandStyle = styled(NavbarBrand)`
   @media (min-width: 800px) {
     margin-left: 70px;
   }
-
+  color: #fff !important;
   margin-right: 90px !important;
   font-family: 'Roboto Slab', serif;
-
-  :hover {
-    color: #fff !important;
-  }
 `;
 
 const NavLinkStyle = styled(NavLink)`
   font-weight: 100;
-  color: ${(props) => (props.href === (process.env.PUBLIC_URL + props.at)) ? '#fff' : '#ffbcbc' }  !important;
+  color: ${(props) => (props['data-link'] === (process.env.PUBLIC_URL + props.at)) ? '#fff' : '#ffbcbc' }  !important;
   
   :hover {
     text-decoration: underline !important;
   }
 `;
 
+export const changeRoute = (href) => {
+  return history.push(href);
+}
+
 export const Navigation = (props) => (
   <NavbarStyled expand="md">
-    <NavbarBrandStyle href={`${process.env.PUBLIC_URL}/`}><h3>BRoster</h3></NavbarBrandStyle>
+    <NavbarBrandStyle onClick={() => changeRoute(`${process.env.PUBLIC_URL}/`)}>
+      <h3>BRoster</h3>
+    </NavbarBrandStyle>
     <NavbarToggler />
     <Collapse isOpen={true} navbar>
       <Nav navbar>
+        
         <NavItem>
-          <NavLinkStyle href={`${process.env.PUBLIC_URL}/`} at={props.atPage}>Tabular view</NavLinkStyle>
+          <NavLinkStyle
+            data-link={`${process.env.PUBLIC_URL}/`}
+            onClick={() => changeRoute(`${process.env.PUBLIC_URL}/`)}
+            at={props.atPage}
+          >
+            Tabular view
+          </NavLinkStyle>
         </NavItem>
+        
         <NavItem>
-          <NavLinkStyle href={`${process.env.PUBLIC_URL}/timeline`} at={props.atPage}>Timeline visualisation</NavLinkStyle>
+          <NavLinkStyle
+            data-link={`${process.env.PUBLIC_URL}/timeline`}
+            onClick={() => changeRoute(`${process.env.PUBLIC_URL}/timeline`)}
+            at={props.atPage}
+          >
+            Timeline visualisation
+          </NavLinkStyle>
         </NavItem>
+        
       </Nav>
     </Collapse>
   </NavbarStyled>

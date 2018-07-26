@@ -6,6 +6,7 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
+import { FaSearch } from 'react-icons/lib/fa';
 
 const TableStyle = styled(Table)`
   font-weight: 100;
@@ -16,6 +17,10 @@ const ButtonStyle = styled(Button)`
   float: right !important;
   background: #900 !important;
   border: none !important;
+  
+  svg {
+    margin-top: -4px;
+  }
 `;
 
 // This is the coloured circle display next to role
@@ -46,7 +51,7 @@ const TableList = (shift, selectedShift, timezone, key, onClickOpenDrawer) => {
           size="sm"
           onClick={() => onClickOpenDrawer(id, true)}
         >
-          Details
+          <FaSearch />
         </ButtonStyle>
       </td>
       

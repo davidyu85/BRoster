@@ -29,6 +29,19 @@ const preprocessedShift = () => {
   return newShift.sort(sortByDateTime);
 }
 
+// The current roles data does not include time for starting / ending a shift.
+// Such info is extracted from the shifts data and added into each role.
+// The current roles data is not sorted, which will be sorted in here.
+const preprocessedRole = () => {
+  roles.forEach((role) => {
+    let shiftRole = shifts.find((shift) => (shift.role_id === role.id));
+    role.default_start_time = shiftRole.start_time.split('T')[1];
+    role.default_end_time = shiftRole.end_time.split('T')[1];
+  });
+  
+  return roles.sort((a, b) => { return a.id - b.id})
+}
+
 // Sort the list based on date/time.
 const sortByDateTime = (a, b) => {
   return new Date(b.start_time) - new Date(a.start_time);
@@ -38,9 +51,11 @@ const sortByDateTime = (a, b) => {
 const initialState = {
   shifts: preprocessedShift(),
   selectedShift: { role: {}, employee: {} },
+  toBeConfirmedShift: {},
   drawer: false,
-  roles,
-  config
+  roles: preprocessedRole(),
+  config,
+  editMode: false
 };
 
 
