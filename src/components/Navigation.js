@@ -45,7 +45,7 @@ export const changeRoute = (href) => {
 
 export const Navigation = (props) => (
   <NavbarStyled expand="md">
-    <NavbarBrandStyle onClick={() => changeRoute(`${process.env.PUBLIC_URL}/`)}>
+    <NavbarBrandStyle>
       <h3>BRoster</h3>
     </NavbarBrandStyle>
     <NavbarToggler />

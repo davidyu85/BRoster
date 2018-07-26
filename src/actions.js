@@ -1,8 +1,10 @@
-export const updateShifts = shiftsArray => ({
-  type: 'UPDATE_SHIFTS',
-  shiftsArray
-});
-
+/**
+ * actions.js - A redux way to store a series of actions to be 
+ * dispatched for calling the reducers to change the state in store.
+ * Any actions that triggers application state changes are all recorded
+ * in here. Functions that does not modify application state should be 
+ * placed in containers / components.
+ */
 export const openDrawer = bool => ({
   type: 'OPEN_DRAWER',
   bool

@@ -24,11 +24,11 @@ const Cancel = styled(ButtonStyle)`
   background: #700 !important;
 `;
 
-const onSelectRole = (event, callBack) => {
+export const onSelectRole = (event, callBack) => {
   return callBack({ role_id: parseInt(event.target.value, 10) });
 }
 
-const onSelectDate = (event, callBack) => {
+export const onSelectDate = (event, callBack) => {
   return callBack({ date: event });
 }
 
