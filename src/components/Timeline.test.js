@@ -35,7 +35,6 @@ describe('Timeline Component', () => {
       { 
         id: 61578,
         group: 1,
-        title: 'Morning shift',
         start_time: moment('2018-06-19T13:00:00'),
         end_time: moment('2018-06-19T21:30:00'),
         style: { backgroundColor: '#fa0' }

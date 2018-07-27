@@ -62,7 +62,6 @@ export const makeItems = (data, timezone) => {
     return ({
       id: shift.id,
       group: shift.employee.id,
-      title: `${shift.role.name} shift`,
       start_time,
       end_time,  
       style: { backgroundColor: shift.role.background_colour }

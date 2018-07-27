@@ -82,9 +82,9 @@ class TimelineViewContainer extends Component {
           </Col>
         </FormGroupStyle>
         <Notes>
-          <div>If the time blocks seems to be out of place, please view the timeline in UTC format.</div>
-          <div>Timezone can be changed via the dropdown box above.</div>
-          <div>Drag to pan the timeline, scroll to zoom in and out.</div>
+          <div>If the time blocks felt out of place due to timezone offset, please view the timeline in UTC format.</div>
+          <div>Drag to pan the timeline, mouse scroll to zoom in and out the view.</div>
+          <div>Clicking on the time blocks currently does not do anything.</div>
         </Notes>
       </div>
     )
