@@ -20,7 +20,7 @@ import {
 
 const Close = styled(FaClose)`
   cursor: pointer;
-  position: absolute;
+  float: right;
   
   :hover {
     color: #600;

@@ -32,7 +32,10 @@ const NavbarBrandStyle = styled(NavbarBrand)`
 
 const NavLinkStyle = styled(NavLink)`
   font-weight: 100;
-  color: ${(props) => (props['data-link'] === (process.env.PUBLIC_URL + props.at)) ? '#fff' : '#ffbcbc' }  !important;
+  cursor: pointer;
+  color: ${(props) => (
+    props['data-link'] === (process.env.PUBLIC_URL + props.at)
+  ) ? '#fff' : '#ffbcbc' }  !important;
   
   :hover {
     text-decoration: underline !important;

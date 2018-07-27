@@ -45,7 +45,11 @@ const TableList = (shift, selectedShift, timezone, key, onClickOpenDrawer) => {
   const { name, background_colour } = role;
 
   return (            
-    <TRSelect key={key} isSelected={(id === selectedShift.id)}>
+    <TRSelect 
+      key={key}
+      isSelected={(id === selectedShift.id)}
+      id={(id === selectedShift.id) ? 'scrollToMe' : ''}
+    >
       <td>
         <ButtonStyle
           size="sm"

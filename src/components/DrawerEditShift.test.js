@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DrawerEditShift, { onSelectRole, onSelectDate } from './DrawerEditShift';
+import DrawerEditShift, { 
+  onSelectRole,
+  onSelectDate,
+  onSave
+} from './DrawerEditShift';
 import { Provider } from 'react-redux';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -41,6 +45,12 @@ describe('Testing for DrawerEditShift.js', () => {
     const mockCallBack = jest.fn();
     onSelectDate(date, mockCallBack);
     expect(mockCallBack.mock.calls[0][0]).toEqual({ date: 'YYYY-MM-DD' });
+  });
+  
+  it('onSave would work - would return blank due to not passing any data.', () => {
+    const mockCallBack = jest.fn();
+    onSave(mockCallBack);
+    expect(mockCallBack.mock.calls[0]).toEqual([]);
   });
   
   it('Dropdown value being changed correctly', () => {

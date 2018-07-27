@@ -35,4 +35,9 @@ export const setToBeConfirmedShift = (dateRoleObj) => ({
 
 export const saveEditedShift = () => ({
   type: 'SAVE_EDITED_SHIFT'
+});
+
+export const setTimelineSetting = (setupObj) => ({
+  type: 'SET_TIMELINE_SETTING',
+  setupObj
 })

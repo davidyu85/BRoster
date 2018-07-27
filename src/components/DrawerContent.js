@@ -46,7 +46,7 @@ export const generateChartData = (roles, shifts, selectedShift) => {
       shift.role_id === role.id
     )).length;
                                       
-    return { value, stroke: role.background_colour }
+    return { value, stroke: role.background_colour, role: role.name }
   });
 
   return chartData;
@@ -69,15 +69,21 @@ export const DrawerContent = (props) => {
     end_time
   } = selectedShift;
   
+  let chartData = generateChartData(roles, shifts, selectedShift);
+  let mostRole = chartData.sort((a, b) => { return b.value - a.value })[0].role;
+
   return (
     <div>
       <DonutWrapper>
         <DonutChart
           spacing={2}
-          data={generateChartData(roles, shifts, selectedShift)} 
+          data={chartData} 
         />
       </DonutWrapper>
-      <center><h3>{`${employee.first_name} ${employee.last_name}`}</h3></center>
+      <center>
+        <h3>{`${employee.first_name} ${employee.last_name}`}</h3>
+        <small>Prefer {mostRole} Shifts</small>
+      </center>
       <hr />
       <h5>Selected Shift:</h5>
       <p><b>Shift ID: </b> #{id}</p>

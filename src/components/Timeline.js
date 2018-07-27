@@ -5,7 +5,7 @@
 
 import React from 'react';
 import Timeline from 'react-calendar-timeline';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import 'react-calendar-timeline/lib/Timeline.css';
  
 // Make groups for timeline visualisation. 
@@ -33,31 +33,59 @@ export const makeGroups = (data) => {
 
 // Make items for timeline visualisation.
 // The items in this context are the time-blocks displayed on timeline. 
-export const makeItems = (data) => {
-  let itemsForVis = data.map((shift) => (
-    {
+export const makeItems = (data, timezone) => {
+  // React-Calendar-Timeline will just change anything to local date.
+  // In order to get this to work to display UTC and Perth time correctly,
+  // string manipulation is necessary even if moment.js is used.
+  let itemsForVis = data.map((shift) => {
+    let start_time, end_time;
+
+    if(timezone === 'utc') {
+      start_time = moment(shift.start_time.split('+')[0]);
+      end_time = moment(shift.end_time.split('+')[0]);
+    } else {
+      start_time = moment(
+        moment(shift.start_time)
+          .tz(timezone)
+          .format()
+          .split('+')[0]
+      );
+      
+      end_time = moment( 
+        moment(shift.end_time)
+          .tz(timezone)
+          .format()
+          .split('+')[0]
+      );
+    }
+    
+    return ({
       id: shift.id,
       group: shift.employee.id,
       title: `${shift.role.name} shift`,
-      start_time: moment(shift.start_time).utc(),
-      end_time: moment(shift.end_time).utc(),
+      start_time,
+      end_time,  
       style: { backgroundColor: shift.role.background_colour }
-    }
-  ));
+    })
+  });
 
   return itemsForVis;
 }
 
-export const TimelineView = (props) => (
-  <Timeline
-    groups={makeGroups(props.data)}
-    items={makeItems(props.data)}
-    defaultTimeStart={moment(props.defaultTimeStart).add('-1','day').utc()}
-    defaultTimeEnd={moment(props.defaultTimeEnd).add('1','day').utc()}
-    canResize={false}
-    canMove={false}
-    traditionalZoom={true}
-    minZoom={(86400 * 1000)}
-    maxZoom={(8 * 86400 * 1000)}
-  />
-);
+export const TimelineView = (props) => {
+  const { data, timezone } = props;
+  // In the zoom properties, 1000 is for 1 second in milliseconds, 86400 is for a day.
+  return (
+    <Timeline
+      groups={makeGroups(data)}
+      items={makeItems(data, timezone)}
+      defaultTimeStart={moment(props.defaultTimeStart).add('-1','day').utc()}
+      defaultTimeEnd={moment(props.defaultTimeEnd).add('1','day').utc()}
+      canResize={false}
+      canMove={false}
+      traditionalZoom={true}
+      minZoom={(86400 * 1000)}
+      maxZoom={(8 * 86400 * 1000)}
+    />
+  )
+};

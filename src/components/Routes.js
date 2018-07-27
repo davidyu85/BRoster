@@ -4,15 +4,11 @@
 
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import TabularViewContainer from '../containers/TabularViewContainer'
-import { TimelineView } from './Timeline';
+import TabularViewContainer from '../containers/TabularViewContainer';
+import TimelineViewContainer from '../containers/TimelineViewContainer';
 
 // Please define the routes here.
-export const RouteList = (props, onToggleDrawer) => {
-  const {
-    shifts
-  } = props;
-
+export const RouteList = (props) => {
   return [
     {
       path: '/',
@@ -20,12 +16,7 @@ export const RouteList = (props, onToggleDrawer) => {
     },
     {
       path: '/timeline',
-      component: 
-        <TimelineView 
-          data={shifts}
-          defaultTimeStart={shifts[shifts.length - 1].end_time}
-          defaultTimeEnd={shifts[0].start_time}
-        />
+      component: <TimelineViewContainer />
     } 
   ]
 };

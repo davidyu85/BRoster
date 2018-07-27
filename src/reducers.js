@@ -79,9 +79,12 @@ const reducers = (state, action) => {
   
       return { ...state, toBeConfirmedShift: newConfirmedShift };
     
+    case 'SET_TIMELINE_SETTING':
+      return { ...state, timelineSetting: action.setupObj };
+
     default:
-      return state;
-  }
+        return state;
+    }
 };
 
 export default reducers;
