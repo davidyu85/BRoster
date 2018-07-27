@@ -1,5 +1,7 @@
 /**
- * TimelineViewContainer.js - 
+ * TimelineViewContainer.js - A container for the timeline view.
+ * The styling of the timeline is done in style.css instead of
+ * Styled-Components.
  */
 
 import React, { Component } from 'react';
