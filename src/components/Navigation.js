@@ -58,7 +58,7 @@ export const Navigation = (props) => (
         <NavItem>
           <NavLinkStyle
             data-link={`${process.env.PUBLIC_URL}/`}
-            onClick={() => changeRoute(`${process.env.PUBLIC_URL}/`)}
+            onClick={() => changeRoute(`/`)}
             at={props.atPage}
           >
             Tabular view
@@ -68,7 +68,7 @@ export const Navigation = (props) => (
         <NavItem>
           <NavLinkStyle
             data-link={`${process.env.PUBLIC_URL}/timeline`}
-            onClick={() => changeRoute(`${process.env.PUBLIC_URL}/timeline`)}
+            onClick={() => changeRoute(`/timeline`)}
             at={props.atPage}
           >
             Timeline visualisation
