@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store';
 import TimelineViewContainer, 
 { 
+  mapStateToProps,
   mapDispatchToProps,
-  onSelectTimezone
+  onSelectTimezone,
+  onSelectAShift
 } from './TimelineViewContainer';
 import { Provider } from 'react-redux';
 import Enzyme, { mount } from 'enzyme';
@@ -28,7 +32,7 @@ describe('Testing for TimelineViewContainer.js', () => {
     const div = document.createElement('div');
     ReactDOM.render(    
       <Provider store={store}>
-        <TimelineViewContainer />
+        <ConnectedRouter history={history}><TimelineViewContainer /></ConnectedRouter>
       </Provider>, 
     div);
     ReactDOM.unmountComponentAtNode(div);

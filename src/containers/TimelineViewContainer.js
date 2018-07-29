@@ -15,7 +15,11 @@ import {
   Col
 } from 'reactstrap';
 import styled from 'styled-components';
-import { setTimelineSetting } from '../actions';
+import { 
+  setTimelineSetting,
+  openDrawer,
+  selectShift
+} from '../actions';
 
 const FormGroupStyle = styled(FormGroup)`
   padding: 24px 36px 4px 18px;
@@ -41,15 +45,31 @@ const Notes = styled.div`
 const mapStateToProps = state => state;
 
 // Enable Redux store dispatch for dispatching an action.
-export const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators(
+export const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
-    setTimelineSetting
+    setTimelineSetting,
+    openDrawer,
+    selectShift
   }, 
   dispatch
 )
 
 export const onSelectTimezone = (event, props) => {
   return props.setTimelineSetting({ timezone: event.target.value });
+}
+
+export const onSelectAShift = (shiftId, props) => {
+  if(!shiftId) return false;
+  
+  const {
+    openDrawer,
+    selectShift,
+    router
+  } = props;
+  
+  selectShift(shiftId);
+  openDrawer(true); 
+  return router.location.pathname = '/';
 }
 
 class TimelineViewContainer extends Component {
@@ -69,6 +89,7 @@ class TimelineViewContainer extends Component {
           defaultTimeStart={shifts[shifts.length - 1].end_time}
           defaultTimeEnd={shifts[0].start_time}
           timezone={timelineSetting.timezone}
+          onSelectTimeBlock={(shiftId) => onSelectAShift(shiftId, this.props)}
         />
         <FormGroupStyle row>
           <Label sm={1}>Timezone:</Label>
@@ -91,6 +112,6 @@ class TimelineViewContainer extends Component {
       </div>
     )
   }
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimelineViewContainer);

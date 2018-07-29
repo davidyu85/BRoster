@@ -21,6 +21,8 @@ describe('Timeline Component', () => {
   });
   
   it('makeItems functions correctly.', () => {
+    const onSelectTimeBlock = jest.fn();
+    
     const data = [
       { 
         id: 61578,
@@ -37,11 +39,21 @@ describe('Timeline Component', () => {
         group: 1,
         start_time: moment('2018-06-19T13:00:00'),
         end_time: moment('2018-06-19T21:30:00'),
-        style: { backgroundColor: '#fa0' }
+        style: { backgroundColor: '#fa0' },
+        itemProps: {
+          id: 61578,
+          onClick: (e) => jest.fn()
+        }
       }
     ];
-
-    expect(makeItems(data, 'utc')).toEqual(expected);
+    
+    let madeItem = makeItems(data, 'utc')[0];
+    expect(madeItem.id).toEqual(61578);
+    expect(madeItem.group).toEqual(1);
+    expect(madeItem.start_time).toEqual(moment('2018-06-19T13:00:00'));
+    expect(madeItem.end_time).toEqual(moment('2018-06-19T21:30:00'));
+    expect(madeItem.style).toEqual({ backgroundColor: '#fa0' });
+    expect(madeItem.itemProps.id).toEqual(61578);
   });
   
   it('TimelineView renders without crashing', () => {

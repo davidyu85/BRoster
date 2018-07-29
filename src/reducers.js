@@ -7,7 +7,7 @@ const reducers = (state, action) => {
 
     case 'SELECT_SHIFT':
       let foundShift = state.shifts.find((shift) => (
-        shift.id === action.shiftId
+        parseInt(shift.id, 10) === parseInt(action.shiftId, 10)
       ));
 
       return { ...state, selectedShift: foundShift }; 

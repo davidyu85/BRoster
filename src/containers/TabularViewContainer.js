@@ -11,6 +11,7 @@ import { FaClose } from 'react-icons/lib/fa';
 import { Tabular } from '../components/Tabular';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import scrollToElement from 'scroll-to-element';
 import styled from 'styled-components';
 import { 
   openDrawer,
@@ -58,6 +59,18 @@ export const onClickOpenDrawer = (shiftId, bool, props) => {
 }
 
 class TabularViewContainer extends Component {
+  componentWillMount() {
+    const { drawer, openDrawer } = this.props;
+    
+    // To open the drawer with true by default, one must false it first before making a true.
+    // So that the drawer can open - this is due to the limitation of the third-party module.
+    if(drawer) {
+      openDrawer(false);
+      setTimeout(() => openDrawer(true), 200);
+      setTimeout(() => scrollToElement('#scrollToMe', { align: 'middle' }), 400);
+    }
+  }
+  
   componentWillUnmount() {
     this.props.openDrawer(false);
   }
@@ -70,7 +83,7 @@ class TabularViewContainer extends Component {
       drawer,
       openDrawer
     } = this.props;
-    
+     
     return (
       <div>
         <Tabular

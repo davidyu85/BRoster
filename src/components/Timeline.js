@@ -33,7 +33,7 @@ export const makeGroups = (data) => {
 
 // Make items for timeline visualisation.
 // The items in this context are the time-blocks displayed on timeline. 
-export const makeItems = (data, timezone) => {
+export const makeItems = (data, timezone, onSelectTimeBlock) => {
   // React-Calendar-Timeline will just change anything to local date.
   // In order to get this to work to display UTC and Perth time correctly,
   // string manipulation is necessary even if moment.js is used.
@@ -64,7 +64,11 @@ export const makeItems = (data, timezone) => {
       group: shift.employee.id,
       start_time,
       end_time,  
-      style: { backgroundColor: shift.role.background_colour }
+      style: { backgroundColor: shift.role.background_colour },
+      itemProps: {
+        id: shift.id,
+        onClick: (e) => onSelectTimeBlock(e.target.id)
+      }
     })
   });
 
@@ -72,12 +76,12 @@ export const makeItems = (data, timezone) => {
 }
 
 export const TimelineView = (props) => {
-  const { data, timezone } = props;
+  const { data, timezone, onSelectTimeBlock } = props;
   // In the zoom properties, 1000 is for 1 second in milliseconds, 86400 is for a day.
   return (
     <Timeline
       groups={makeGroups(data)}
-      items={makeItems(data, timezone)}
+      items={makeItems(data, timezone, onSelectTimeBlock)}
       defaultTimeStart={moment(props.defaultTimeStart).add('-1','day').utc()}
       defaultTimeEnd={moment(props.defaultTimeEnd).add('1','day').utc()}
       canResize={false}

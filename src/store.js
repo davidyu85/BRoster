@@ -24,10 +24,6 @@ const preprocessedShift = () => {
     latest.role = roles.find( // Add role data.
       role => role.id === latest.role_id
     );
-    
-    // Remove timezone so that local time in Brisbane won't appear.
-    //latest.start_time = latest.start_time.split('+')[0];
-    //latest.end_time = latest.end_time.split('+')[0]; 
   });
 
   return newShift.sort(sortByDateTime);
