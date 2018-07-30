@@ -22,6 +22,6 @@ describe('Testing for findOverlapShifts.', () => {
       { id: 7, role_id: 3, employee_id: 5, overwork: false  }
     ];
     
-    expect(findOverlapShifts(shifts)).toBe(expected);
+    expect(findOverlapShifts(shifts)).toEqual(expected);
   });
 });

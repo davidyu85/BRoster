@@ -82,11 +82,11 @@ describe('Testing the reducers.js', () => {
       })
     ).toEqual({
       toBeConfirmedShift: {},
-      selectedShift: { id: 2, value: 'abc', employee_id: 2 },
+      selectedShift: { id: 2, value: 'abc', employee_id: 2, overwork: false },
       shifts: [
-        { id: 1, value: 'a', employee_id: 1 },
-        { id: 2, value: 'abc', employee_id: 2 },
-        { id: 3, value: 'c', employee_id: 3 }],
+        { id: 1, value: 'a', employee_id: 1, overwork: false },
+        { id: 2, value: 'abc', employee_id: 2, overwork: false },
+        { id: 3, value: 'c', employee_id: 3, overwork: false }],
       editMode: false,
     })
   });

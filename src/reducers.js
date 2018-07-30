@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { findOverlapShifts } from './components/findOverlapShifts';
 
 const reducers = (state, action) => {
   switch(action.type) {
@@ -32,6 +33,8 @@ const reducers = (state, action) => {
       newListOfShifts.sort((a, b) => {
         return new Date(b.start_time) - new Date(a.start_time);
       });
+  
+      findOverlapShifts(newListOfShifts);
         
       return { 
         ...state,
