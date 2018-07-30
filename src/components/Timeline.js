@@ -6,6 +6,7 @@
 import React from 'react';
 import Timeline from 'react-calendar-timeline';
 import moment from 'moment-timezone';
+import { FaExclamationCircle } from 'react-icons/lib/fa';
 import 'react-calendar-timeline/lib/Timeline.css';
  
 // Make groups for timeline visualisation. 
@@ -61,6 +62,7 @@ export const makeItems = (data, timezone, onSelectTimeBlock) => {
     
     return ({
       id: shift.id,
+      title: shift.overwork ? <FaExclamationCircle /> : '',
       group: shift.employee.id,
       start_time,
       end_time,  

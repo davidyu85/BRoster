@@ -69,9 +69,12 @@ describe('Testing the reducers.js', () => {
   it('Save edited shift.', () => {
     expect(
       reducer({ 
-        toBeConfirmedShift: { id: 2, value: 'abc' },
-        selectedShift: { id: 2, value: 'b'},
-        shifts: [{ id: 1, value: 'a'}, { id: 2, value: 'b'}, { id: 3, value: 'c'}],
+        toBeConfirmedShift: { id: 2, value: 'abc', employee_id: 2 },
+        selectedShift: { id: 2, value: 'b', employee_id: 2},
+        shifts: [
+          { id: 1, value: 'a', employee_id: 1 },
+          { id: 2, value: 'b', employee_id: 2 },
+          { id: 3, value: 'c', employee_id: 3 }],
         editMode: true,
       },
       {
@@ -79,8 +82,11 @@ describe('Testing the reducers.js', () => {
       })
     ).toEqual({
       toBeConfirmedShift: {},
-      selectedShift: { id: 2, value: 'abc' },
-      shifts: [{ id: 1, value: 'a'}, { id: 2, value: 'abc' }, { id: 3, value: 'c'}],
+      selectedShift: { id: 2, value: 'abc', employee_id: 2 },
+      shifts: [
+        { id: 1, value: 'a', employee_id: 1 },
+        { id: 2, value: 'abc', employee_id: 2 },
+        { id: 3, value: 'c', employee_id: 3 }],
       editMode: false,
     })
   });

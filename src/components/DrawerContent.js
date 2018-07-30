@@ -5,8 +5,8 @@
  */
 import React from 'react';
 import DonutChart from "react-svg-donut-chart";
-import { Button } from 'reactstrap';
-import { FaEdit } from 'react-icons/lib/fa';
+import { Button, Badge } from 'reactstrap';
+import { FaEdit, FaExclamationCircle } from 'react-icons/lib/fa';
 import moment from 'moment-timezone';
 import styled from 'styled-components';
 
@@ -66,7 +66,8 @@ export const DrawerContent = (props) => {
     employee,
     role,
     start_time,
-    end_time
+    end_time,
+    overwork
   } = selectedShift;
   
   let chartData = generateChartData(roles, shifts, selectedShift);
@@ -85,7 +86,7 @@ export const DrawerContent = (props) => {
         <small>Prefer {mostRole} Shifts</small>
       </center>
       <hr />
-      <h5>Selected Shift:</h5>
+      <h5>Selected Shift: {(overwork) ? <Badge pill><FaExclamationCircle /> Overwork</Badge> : ''}</h5>
       <p><b>Shift ID: </b> #{id}</p>
       <p><b>Role Type: </b> <ShiftBadge colour={role.background_colour}>{role.name} shift</ShiftBadge></p>
       <hr />

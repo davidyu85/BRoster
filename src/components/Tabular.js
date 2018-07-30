@@ -6,7 +6,7 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
-import { FaSearch } from 'react-icons/lib/fa';
+import { FaSearch, FaExclamationCircle } from 'react-icons/lib/fa';
 
 const TableStyle = styled(Table)`
   font-weight: 100;
@@ -38,9 +38,10 @@ const TRSelect = styled.tr`
   td { vertical-align: middle !important; }
 `;
 
+
 // Template of how the table rows are represented.
 const TableList = (shift, selectedShift, timezone, key, onClickOpenDrawer) => {
-  const { id, employee, role, start_time, end_time } = shift;
+  const { id, employee, role, start_time, end_time, overwork } = shift;
   const { first_name, last_name } = employee;
   const { name, background_colour } = role;
 
@@ -60,7 +61,8 @@ const TableList = (shift, selectedShift, timezone, key, onClickOpenDrawer) => {
       </td>
       
       <td>
-        {`${first_name} ${last_name}`}
+        {`${first_name} ${last_name} `}
+        { overwork ? <FaExclamationCircle /> : ''}
       </td>
       
       <td>

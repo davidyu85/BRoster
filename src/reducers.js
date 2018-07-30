@@ -31,7 +31,7 @@ const reducers = (state, action) => {
       newListOfShifts[foundIndex] = toBeConfirmedShift;
       newListOfShifts.sort((a, b) => {
         return new Date(b.start_time) - new Date(a.start_time);
-      })
+      });
         
       return { 
         ...state,
