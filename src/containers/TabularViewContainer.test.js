@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import TabularViewContainer, 
 { 
   onClickOpenDrawer,
+  runWhenDrawerIsTrue,
   mapDispatchToProps
 } from './TabularViewContainer';
 import { Provider } from 'react-redux';
@@ -18,6 +19,8 @@ describe('Testing for TabularViewContainer.js', () => {
       <TabularViewContainer />
     </Provider>
   );
+  
+  jest.useFakeTimers();
   
   it('TabularViewContainer renders without crashing', () => {
     const div = document.createElement('div');
@@ -41,6 +44,18 @@ describe('Testing for TabularViewContainer.js', () => {
     expect(dispatch.mock.calls[0][0]).toEqual({ bool: false, type: 'SET_EDIT_MODE'});
     expect(dispatch.mock.calls[1][0]).toEqual({ shiftId: 1, type: 'SELECT_SHIFT'});
     expect(dispatch.mock.calls[2][0]).toEqual({ bool: true, type: 'OPEN_DRAWER'});
+  });
+  
+  it('runWhenDrawerIsTrue functions as intended', () => {
+    const dispatch = jest.fn();
+    let props = mapDispatchToProps(dispatch);
+    props.drawer = true;
+
+    runWhenDrawerIsTrue(props);
+    expect(dispatch.mock.calls[0][0]).toEqual({ bool: false, type: 'OPEN_DRAWER'});
+    jest.runAllTimers();
+    expect(dispatch.mock.calls[1][0]).toEqual({ bool: true, type: 'OPEN_DRAWER'});
+    
   });
   
   it('Click the close button to change state for closing the drawer', () => {

@@ -57,18 +57,24 @@ export const onClickOpenDrawer = (shiftId, bool, props) => {
  
   return openDrawer(bool);
 }
+// This function will proceed in componentWillMount and given that drawer state is true.
+export const runWhenDrawerIsTrue = (props) => {
+  const { drawer, openDrawer } = props;
+
+  // To open the drawer with true by default, one must false it first before making a true.
+  // So that the drawer can open - this is due to the limitation of the third-party module.
+  if(drawer) {
+    openDrawer(false);
+    setTimeout(() => openDrawer(true), 200);
+    setTimeout(() => scrollToElement('#scrollToMe', { align: 'middle' }), 400);
+  }
+  
+  return;
+}
 
 class TabularViewContainer extends Component {
   componentWillMount() {
-    const { drawer, openDrawer } = this.props;
-    
-    // To open the drawer with true by default, one must false it first before making a true.
-    // So that the drawer can open - this is due to the limitation of the third-party module.
-    if(drawer) {
-      openDrawer(false);
-      setTimeout(() => openDrawer(true), 200);
-      setTimeout(() => scrollToElement('#scrollToMe', { align: 'middle' }), 400);
-    }
+    runWhenDrawerIsTrue(this.props);
   }
   
   componentWillUnmount() {

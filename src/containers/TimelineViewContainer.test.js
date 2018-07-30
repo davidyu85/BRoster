@@ -28,6 +28,15 @@ describe('Testing for TimelineViewContainer.js', () => {
     );
   });
   
+  it('onSelectAShift dispatch correct actions with a shiftId', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.router = { location: { pathname: '/timeline' } };
+    onSelectAShift(123, props);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: 'SELECT_SHIFT', shiftId: 123 });
+    expect(dispatch.mock.calls[1][0]).toEqual({ type: 'OPEN_DRAWER', bool: true });
+  });
+  
   it('TabularViewContainer renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(    

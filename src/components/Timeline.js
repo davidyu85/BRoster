@@ -62,7 +62,7 @@ export const makeItems = (data, timezone, onSelectTimeBlock) => {
     
     return ({
       id: shift.id,
-      title: shift.overwork ? <FaExclamationCircle /> : '',
+      title: shift.overwork ? <FaExclamationCircle /> : shift.role.name.substr(0,1),
       group: shift.employee.id,
       start_time,
       end_time,  
